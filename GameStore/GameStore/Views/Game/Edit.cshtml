@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model GameStore.Models.Game
+<h2>Игра № @Model.Id</h2>
+@using (Html.BeginForm("Edit", "Game", FormMethod.Post))
+{
+    <fieldset>
+        @Html.HiddenFor(m => m.Id)
+        <p>
+            @Html.LabelFor(m => m.Name, "Название игры")
+            <br />
+            @Html.EditorFor(m => m.Name)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Company, "Компания")
+            <br />
+            @Html.EditorFor(m => m.Company)
+
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Price, "Цена")
+            <br />
+            @Html.EditorFor(m => m.Price)
+        </p>
+        <p><input type="submit" value="Отправить" /></p>
+    </fieldset>
+}
+

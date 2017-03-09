@@ -1,0 +1,27 @@
+﻿@model GameStore.Models.Game
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Новая игра</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Name, "Название игры")
+    <br />
+    @Html.EditorFor(model => model.Name)
+    <br /><br />
+    
+    @Html.LabelFor(model => model.Company, "Компания")
+    <br />
+    @Html.EditorFor(model => model.Company)
+    <br /><br />
+    
+    @Html.LabelFor(model => model.Price, "Цена")
+    <br />
+    @Html.EditorFor(model => model.Price)
+    <br /><br />
+    <input type="submit" value="Добавить" />
+}

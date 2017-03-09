@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Game Shop";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h3>Распродажа игр</h3>
+    <table>
+        <tr>
+            <td><p><a href="/Game/Create" />Добавить игру</p></td>
+        </tr>
+        <tr>
+            <td><p>Название игры</p></td>
+            <td><p>Компания</p></td>
+            <td><p>Цена</p></td>
+        </tr>
+        @foreach (var g in ViewBag.Games)
+        {
+            <tr>
+                <td><p>@g.Name</p></td>
+                <td><p>@g.Company</p></td>
+                <td><p>@g.Price$</p></td>
+                <td><p><a href="/Game/Delete?id=@g.Id" />Delete</p></td>
+                <td><p><a href="/Game/Edit?id=@g.Id" />Edit</p></td>
+            </tr>
+        }
+    </table>
+</div>
