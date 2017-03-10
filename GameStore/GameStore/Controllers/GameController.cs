@@ -11,14 +11,26 @@ namespace GameStore.Controllers
     public class GameController : Controller
     {
         GameContext db = new GameContext();
-
+        
         public ActionResult Index()
         {
             IEnumerable<Game> games = db.Games;
 
             ViewBag.Games = games;
 
+            ViewBag.UserAccess = UserAccess.SetAccess();
+
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult ChangeUser()
+        {
+            UserAccess.Admin = !UserAccess.Admin;
+
+            ViewBag.UserAccess = UserAccess.SetAccess();
+
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

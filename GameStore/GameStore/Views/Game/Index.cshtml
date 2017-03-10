@@ -1,15 +1,20 @@
 ﻿
 @{
-    ViewBag.Title = "Game Shop";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Game Shop";
 }
 
 <div>
     <h3>Распродажа игр</h3>
+    @{  string access = ViewBag.UserAccess; }
+    <nav>
+        @if (GameStore.Models.UserAccess.Admin)
+        {
+            @Html.ActionLink("Добавить игру", "Create", "Game")
+        }
+        @Html.ActionLink(access, "ChangeUser", "Game")
+    </nav>
     <table>
-        <tr>
-            <td><p><a href="/Game/Create" />Добавить игру</p></td>
-        </tr>
         <tr>
             <td><p>Название игры</p></td>
             <td><p>Компания</p></td>
@@ -21,8 +26,15 @@
                 <td><p>@g.Name</p></td>
                 <td><p>@g.Company</p></td>
                 <td><p>@g.Price$</p></td>
-                <td><p><a href="/Game/Delete?id=@g.Id" />Delete</p></td>
-                <td><p><a href="/Game/Edit?id=@g.Id" />Edit</p></td>
+                @if (GameStore.Models.UserAccess.Admin)
+                {
+                    <td><p><a href="/Game/Delete?id=@g.Id" />Удалить</p></td>
+                    <td><p><a href="/Game/Edit?id=@g.Id" />Отредактировать</p></td>
+                }
+                @if (!GameStore.Models.UserAccess.Admin)
+                {
+                    <td><p><a href="/Game/Buy" />Купить игру</p></td>
+                }
             </tr>
         }
     </table>
