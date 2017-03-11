@@ -1,0 +1,26 @@
+﻿@model GameStore.Models.Purchase
+
+@{
+    ViewBag.Title = "Buy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Buy: @ViewBag.BuyName</h3>
+
+@using (Html.BeginForm("Buy", "Game", FormMethod.Post))
+{
+    string gamename = ViewBag.BuyName;
+
+    @Html.HiddenFor(model => model.GameName, gamename)
+
+    @Html.LabelFor(model => model.Address, "Ваш адрес: ")
+    @Html.EditorFor(model => model.Address)
+    <br /><br />
+
+    @Html.LabelFor(model => model.Message, "Ваш отзыв: ")
+    @Html.EditorFor(model => model.Message)
+    <br /><br />
+    
+    <input type="submit" value="Купить" />
+}
+

@@ -11,7 +11,7 @@ namespace GameStore.Controllers
     public class GameController : Controller
     {
         GameContext db = new GameContext();
-        
+
         public ActionResult Index()
         {
             IEnumerable<Game> games = db.Games;
@@ -21,6 +21,25 @@ namespace GameStore.Controllers
             ViewBag.UserAccess = UserAccess.SetAccess();
 
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult Buy(string name)
+        {
+            ViewBag.BuyName = name;
+
+            return View(new Purchase() {GameName = name });
+        }
+
+        [HttpPost]
+        public ActionResult Buy(Purchase purchase)
+        {
+            purchase.Date = DateTime.Now;
+
+            db.Purchases.Add(purchase);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

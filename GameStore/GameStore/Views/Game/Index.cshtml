@@ -33,7 +33,7 @@
                 }
                 @if (!GameStore.Models.UserAccess.Admin)
                 {
-                    <td><p><a href="/Game/Buy" />Купить игру</p></td>
+                    <td><p><a href="/Game/Buy?name=@g.Name" />Купить игру</p></td>
                 }
             </tr>
         }

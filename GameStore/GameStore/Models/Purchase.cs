@@ -9,8 +9,12 @@ namespace GameStore.Models
     {
         public int PurchaseId { get; set; }
 
-        public int GameId { get; set; }
+        public string GameName { get; set; }
 
         public DateTime Date { get; set; }
+
+        public string Address { get; set; }
+
+        public string Message { get; set; }
     }
 }
