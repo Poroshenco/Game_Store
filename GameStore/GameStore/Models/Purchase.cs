@@ -16,5 +16,7 @@ namespace GameStore.Models
         public string Email { get; set; }
 
         public string Message { get; set; }
+
+        public string PaymentMethod { get; set; }
     }
 }
