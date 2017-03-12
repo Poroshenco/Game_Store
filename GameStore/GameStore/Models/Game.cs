@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 
@@ -14,5 +15,7 @@ namespace GameStore.Models
         public string Company { get; set; }
 
         public double Price { get; set; }
+
+        //public Image Icon { get; set; }
     }
 }

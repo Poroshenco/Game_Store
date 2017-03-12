@@ -5,22 +5,41 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>Buy: @ViewBag.BuyName</h3>
+<div class="container">
+    <div class="col-lg-push-4 col-lg-4" style="padding-top: 30px">
+        @using (Html.BeginForm("Buy", "Game", FormMethod.Post))
+        {
+            @Html.Hidden("GameName", @ViewBag.BuyName as string)
 
-@using (Html.BeginForm("Buy", "Game", FormMethod.Post))
-{
-    string gamename = ViewBag.BuyName;
+            <div class="content">
+                <h3>Покупка @ViewBag.BuyName</h3>
+            </div>
 
-    @Html.HiddenFor(model => model.GameName, gamename)
+            <div class="form-group">
+                <label for="eMail">Ваш e-mail</label>
+                <input type="text" name="Email" id="eMail" class="form-control" placeholder="Введите e-mail" />
+            </div>
 
-    @Html.LabelFor(model => model.Address, "Ваш адрес: ")
-    @Html.EditorFor(model => model.Address)
-    <br /><br />
+            <div class="form-group">
+                <label for="message">Ваш отзыв</label>
+                <textarea class="form-control" name="Message" placeholder="Напишите отзыв" style="height: 100px;"></textarea>
+            </div>
 
-    @Html.LabelFor(model => model.Message, "Ваш отзыв: ")
-    @Html.EditorFor(model => model.Message)
-    <br /><br />
-    
-    <input type="submit" value="Купить" />
-}
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Способ оплаты</button>
+                <ul class="dropdown-menu">
+                    <li>Penis</li>
+                    <li>Vagina</li>
+                    <li>Pizda</li>
+                </ul>
+            </div>
+
+            <div class="content" style="padding-top: 20px;">
+                <button type="submit" class="btn btn-success" style="width: 150px;">Купить</button>
+            </div>
+        }
+    </div>
+
+
+</div>
 

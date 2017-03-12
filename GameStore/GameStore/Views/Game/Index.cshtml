@@ -4,38 +4,55 @@
     ViewBag.Title = "Game Shop";
 }
 
-<div>
-    <h3>Распродажа игр</h3>
-    @{  string access = ViewBag.UserAccess; }
-    <nav>
+<div class="container">
+    <div class="content">
+        <h3>Распродажа игр</h3>
+
+        @{  string access = ViewBag.UserAccess; }
         @if (GameStore.Models.UserAccess.Admin)
-        {
-            @Html.ActionLink("Добавить игру", "Create", "Game")
+            {
+            <button type="button" class="btn">
+                @Html.ActionLink("Добавить игру", "Create", "Game")
+            </button>
         }
-        @Html.ActionLink(access, "ChangeUser", "Game")
-    </nav>
-    <table>
-        <tr>
-            <td><p>Название игры</p></td>
-            <td><p>Компания</p></td>
-            <td><p>Цена</p></td>
-        </tr>
-        @foreach (var g in ViewBag.Games)
-        {
-            <tr>
-                <td><p>@g.Name</p></td>
-                <td><p>@g.Company</p></td>
-                <td><p>@g.Price$</p></td>
-                @if (GameStore.Models.UserAccess.Admin)
+        <button type="button" class="btn">@Html.ActionLink(access, "ChangeUser", "Game")</button>
+    </div>
+    <br />
+    <div>
+        <div class="col-lg-push-2 col-lg-8">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th><p>Название игры</p></th>
+                        <th><p>Компания</p></th>
+                        <th><p>Цена</p></th>
+                        <th><p></p></th>
+                        @if (GameStore.Models.UserAccess.Admin)
+                        {
+                            <th><p></p></th> }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var g in ViewBag.Games)
+            {
+                        <tr>
+                            <td><p>@g.Name</p></td>
+                            <td><p>@g.Company</p></td>
+                            <td><p>@g.Price$</p></td>
+                            @if (GameStore.Models.UserAccess.Admin)
                 {
-                    <td><p><a href="/Game/Delete?id=@g.Id" />Удалить</p></td>
-                    <td><p><a href="/Game/Edit?id=@g.Id" />Отредактировать</p></td>
-                }
-                @if (!GameStore.Models.UserAccess.Admin)
+                                <td><p><a href="/Game/Delete?id=@g.Id" />Удалить</p></td>
+                                <td><p><a href="/Game/Edit?id=@g.Id" />Отредактировать</p></td>
+                            }
+                            @if (!GameStore.Models.UserAccess.Admin)
                 {
-                    <td><p><a href="/Game/Buy?name=@g.Name" />Купить игру</p></td>
-                }
-            </tr>
-        }
-    </table>
+                                <td><p><a href="/Game/Buy?name=@g.Name" />Купить игру</p></td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>

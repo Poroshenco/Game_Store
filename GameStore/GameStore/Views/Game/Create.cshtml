@@ -5,23 +5,33 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Новая игра</h2>
+<div class="container" style="padding-top: 30px;">
+    <div class="col-lg-push-4 col-lg-4">
+        @using (Html.BeginForm("Create", "Game", FormMethod.Post))
+        {
+            <div class="content"><h3>Новая игра</h3></div>
 
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(model => model.Name, "Название игры")
-    <br />
-    @Html.EditorFor(model => model.Name)
-    <br /><br />
-    
-    @Html.LabelFor(model => model.Company, "Компания")
-    <br />
-    @Html.EditorFor(model => model.Company)
-    <br /><br />
-    
-    @Html.LabelFor(model => model.Price, "Цена")
-    <br />
-    @Html.EditorFor(model => model.Price)
-    <br /><br />
-    <input type="submit" value="Добавить" />
-}
+            <div class="form-group">
+                <label for="nameGame">Название игры</label>
+                <input type="text" name="Name" id="nameGame" class="form-control" placeholder="Введите название" />
+            </div>
+
+            <div class="form-group">
+                <label for="gameCompany">Компания</label>
+                <input type="text" name="Company" id="gameCompany" class="form-control" placeholder="Введите название компании" />
+            </div>
+
+            <div class="form-group">
+                <label for="gamePrice">Цена</label>
+                <input type="text" name="Price" id="gamePrice" class="form-control" placeholder="Введите цену" />
+            </div>
+
+            <input type="file" name="Icon" value="Загрузить картинку" />
+            
+
+            <div style="padding-top: 10px;">
+                <button type="submit" class="btn btn-block">Добавить игру</button>
+            </div>
+        }
+    </div>
+</div>

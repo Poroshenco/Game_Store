@@ -32,7 +32,7 @@ namespace GameStore.Controllers
         }
 
         [HttpPost]
-        public ActionResult Buy(Purchase purchase)
+        public ActionResult Buy(Purchase purchase, string CallOut)
         {
             purchase.Date = DateTime.Now;
 
