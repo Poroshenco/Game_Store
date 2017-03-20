@@ -6,16 +6,14 @@
 
 <div class="container">
     <div class="content">
-        <h3>Распродажа игр</h3>
+        <h3>Магазин игр</h3>
 
         @{  string access = ViewBag.UserAccess; }
         @if (GameStore.Models.UserAccess.Admin)
             {
-            <button type="button" class="btn">
-                @Html.ActionLink("Добавить игру", "Create", "Game")
-            </button>
+                @Html.ActionLink("Добавить игру", "Create", "Game", new { @class = "btn btn-default" })
         }
-        <button type="button" class="btn">@Html.ActionLink(access, "ChangeUser", "Game")</button>
+        @Html.ActionLink(access, "ChangeUser", "Game", new {@class="btn btn-default" })
     </div>
     <br />
     <div>
@@ -36,17 +34,17 @@
                     @foreach (var g in ViewBag.Games)
             {
                         <tr>
-                            <td><p>@g.Name</p></td>
-                            <td><p>@g.Company</p></td>
-                            <td><p>@g.Price$</p></td>
+                            <td>@g.Name</td>
+                            <td>@g.Company</td>
+                            <td>@g.Price$</td>
                             @if (GameStore.Models.UserAccess.Admin)
                 {
-                                <td><p><a href="/Game/Delete?id=@g.Id" />Удалить</p></td>
-                                <td><p><a href="/Game/Edit?id=@g.Id" />Отредактировать</p></td>
+                                <td>@Html.ActionLink("Редактировать", "Edit", "Game", new { id = g.Id }, new { @class = "btn btn-default btn-block" })</td>
+                                <td>@Html.ActionLink("Удалить", "Delete", "Game",new {id = g.Id }, new { @class = "btn btn-default btn-block" })</td>
                             }
                             @if (!GameStore.Models.UserAccess.Admin)
                 {
-                                <td><p><a href="/Game/Buy?name=@g.Name" />Купить игру</p></td>
+                                <td><a href="/Game/Buy?name=@g.Name" />Купить игру</td>
                             }
                         </tr>
                     }

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using GameStore.Models;
 using System.Data.Entity;
+using System.Drawing;
 
 namespace GameStore.Controllers
 {
@@ -28,7 +29,7 @@ namespace GameStore.Controllers
         {
             ViewBag.BuyName = name;
 
-            return View(new Purchase() {GameName = name });
+            return View(new Purchase() { GameName = name });
         }
 
         [HttpPost]
@@ -56,18 +57,23 @@ namespace GameStore.Controllers
         public ActionResult Edit(int id)
         {
             Game game = db.Games.Find(id);
-            
+
             return View(game);
         }
 
         [HttpPost]
         public ActionResult Edit(Game game)
         {
-            db.Entry(game).State = EntityState.Modified;
+            if (ModelState.IsValid)
+            {
+                db.Entry(game).State = EntityState.Modified;
 
-            db.SaveChanges();
+                db.SaveChanges();
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+
+            return View();
         }
 
         [HttpGet]
@@ -79,10 +85,15 @@ namespace GameStore.Controllers
         [HttpPost]
         public ActionResult Create(Game game)
         {
-            db.Games.Add(game);
-            db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                db.Games.Add(game);
+                db.SaveChanges();
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+
+            return View(game);
         }
 
         [HttpGet]
