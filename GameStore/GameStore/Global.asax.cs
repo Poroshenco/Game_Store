@@ -11,7 +11,7 @@ namespace GameStore
         protected void Application_Start()
         {
             Database.SetInitializer(new GameDbInitializer());
-            UserAccess.Admin = false;
+            UserAccess.Admin = true;
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

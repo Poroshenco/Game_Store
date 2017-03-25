@@ -73,7 +73,7 @@ namespace GameStore.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View();
+            return View(game);
         }
 
         [HttpGet]

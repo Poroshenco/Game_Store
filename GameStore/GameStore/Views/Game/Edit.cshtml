@@ -5,30 +5,59 @@
 }
 
 @model GameStore.Models.Game
-<h2>Игра № @Model.Id</h2>
-@using (Html.BeginForm("Edit", "Game", FormMethod.Post))
-{
-    <div class="editor-label">
-        @Html.LabelFor(model => model.Name,"Введите название")
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.Name)
-        @Html.ValidationMessageFor(model => model.Name)
-    </div>
 
-        @Html.HiddenFor(model => model.Id)
-        <p>
-            @Html.LabelFor(m => m.Company, "Компания")
-            <br />
-            @Html.EditorFor(m => m.Company)
+<div class="container col-sm-push-4 col-sm-4">
+    @using (Html.BeginForm("Edit", "Game", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        string name = "", company = "", description = "";
+        double price = 0;
 
-        </p>
-        <p>
-            @Html.LabelFor(m => m.Price, "Цена")
-            <br />
-            @Html.EditorFor(m => m.Price)
-        </p>
-        <p><input type="submit" value="Отправить" /></p>
+        if (Model != null)
+        {
+            name = Model.Name != null ? Model.Name : "";
+            company = Model.Company != null ? Model.Company : "";
+            price = Model.Price != 0 ? Model.Price : 0;
+            description = Model.Description != null ? Model.Description : "";
+        }
 
-}
+        <div class="col-sm-offset-3" style="padding-top: 30px; padding-left: 10px;"><h3>Edit <small>@name</small></h3></div>
 
+        <div class="form-group">
+            <label class="control-label col-sm-3">Name:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="Name" placeholder="Enter name" value="@name" required>
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="cmp">Company:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="cmp" name="Company" value="@company" placeholder="Enter company" required>
+                @Html.ValidationMessageFor(model => model.Company)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="pr">Price:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="pr" name="Price" value="@price" placeholder="Enter price" required>
+                @Html.ValidationMessageFor(model => model.Price)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="pr">Description:</label>
+            <div class="col-sm-9">
+                <textarea class="form-control" name="Description" placeholder="Enter description of the game" style="height: 100px;" required>@description</textarea>
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </div>
+    }
+</div>

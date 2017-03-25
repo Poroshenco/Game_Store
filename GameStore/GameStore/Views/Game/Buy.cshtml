@@ -9,10 +9,10 @@
     <div class="col-lg-push-3 col-lg-6" style="padding-top: 30px">
         @using (Html.BeginForm("Buy", "Game", FormMethod.Post))
         {
-            @Html.Hidden("GameName", @ViewBag.BuyName as string)
+            string nameGame = Model.GameName != null? Model.GameName: "";
 
             <div class="content">
-                <h3>Покупка @ViewBag.BuyName</h3>
+                <h3>Покупка <small>[@nameGame]</small></h3>
             </div>
 
             <div class="form-group">

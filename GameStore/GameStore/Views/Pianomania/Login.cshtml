@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/Layout_PianoMania.cshtml";
+}
+
+<div class="container" style="padding-top: 40px;">
+
+    <div class="col-sm-offset-4 col-sm-4">
+        
+        @using (Html.BeginForm("Login", "Pianomania", FormMethod.Post))
+        {
+            <div style="text-align: center"><h3><label>Log in</label></h3></div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" placeholder="Enter email" class="form-control" name="#" required/>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" placeholder="Enter password" class="form-control" name="#"  required/>
+            </div>
+
+            <div>
+                <button class="btn-default btn" type="submit" style="width: 115px;">Log in</button>
+                <a href="#" class="btn btn-danger" style="width: 110px;">Google</a>
+                <a href="#" class="btn btn-primary" style="width: 115px;">Facebook</a>
+            </div>
+
+            <div style="padding-top: 10px">
+                <h5><label>New user?</label>@Html.ActionLink(" Sign up!","Register", "Pianomania")</h5>
+            </div>
+        }
+
+    </div>
+
+</div>
+

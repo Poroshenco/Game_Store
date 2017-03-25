@@ -1,56 +1,52 @@
 ﻿
 @{
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Game Shop";
 }
 
-<div class="container">
-    <div class="content">
-        <h3>Магазин игр</h3>
+<div class="container col-sm-offset-3 col-sm-6">
 
-        @{  string access = ViewBag.UserAccess; }
+    <div style="text-align: center;"><h2><label>Game Store</label></h2></div>
+
+    @foreach (GameStore.Models.Game game in ViewBag.Games)
+    {
+        <div class="col-sm-12" style="background-color: white; border: 2px solid black; border-radius: 10px; margin: 10px; padding-top: 10px; padding-bottom: 10px;">
+            <div class="col-sm-9">
+                <h4><label>@game.Name</label></h4>
+                <h5>Company: @game.Company</h5>
+                <p><small>@game.Description</small></p>
+            </div>
+
+            @if (!GameStore.Models.UserAccess.Admin)
+                {
+                <div class="col-sm-3" style="text-align: right; padding-top: 10px;">
+                    <a href="/Game/Buy?name=@game.Name" class="btn btn-success" style="width: 80%">Buy | @game.Price$</a>
+                </div>
+            }
+
+            @if (GameStore.Models.UserAccess.Admin)
+                {
+                <div class="btn-group col-sm-3" style="text-align: right; padding-top: 10px;">
+                    @Html.ActionLink("Edit", "Edit", "Game", new { id = game.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Delete", "Delete", "Game", new { id = game.Id }, new { @class = "btn btn-success " })
+                </div>
+            }
+        </div>
+    }
+
+    <div style="text-align: center">
         @if (GameStore.Models.UserAccess.Admin)
             {
-                @Html.ActionLink("Добавить игру", "Create", "Game", new { @class = "btn btn-default" })
+            <div class="form-group">
+                @Html.ActionLink("Create game", "Create", "Game", new { @class = "btn btn-success" })
+                @Html.ActionLink("Status: admin", "ChangeUser", "Game", new { @class = "btn btn-success" })
+            </div>
         }
-        @Html.ActionLink(access, "ChangeUser", "Game", new {@class="btn btn-default" })
-    </div>
-    <br />
-    <div>
-        <div class="col-lg-push-2 col-lg-8">
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th><p>Название игры</p></th>
-                        <th><p>Компания</p></th>
-                        <th><p>Цена</p></th>
-                        <th><p></p></th>
-                        @if (GameStore.Models.UserAccess.Admin)
-                        {
-                            <th><p></p></th> }
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var g in ViewBag.Games)
+        @if (!GameStore.Models.UserAccess.Admin)
             {
-                        <tr>
-                            <td>@g.Name</td>
-                            <td>@g.Company</td>
-                            <td>@g.Price$</td>
-                            @if (GameStore.Models.UserAccess.Admin)
-                {
-                                <td>@Html.ActionLink("Редактировать", "Edit", "Game", new { id = g.Id }, new { @class = "btn btn-default btn-block" })</td>
-                                <td>@Html.ActionLink("Удалить", "Delete", "Game",new {id = g.Id }, new { @class = "btn btn-default btn-block" })</td>
-                            }
-                            @if (!GameStore.Models.UserAccess.Admin)
-                {
-                                <td><a href="/Game/Buy?name=@g.Name" />Купить игру</td>
-                            }
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+            @Html.ActionLink("Status: buyer", "ChangeUser", "Game", new { @class = "btn btn-success" })
+        }
     </div>
 
 </div>
+

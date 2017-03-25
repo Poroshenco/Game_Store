@@ -17,7 +17,10 @@ namespace GameStore.Models
         [Required (ErrorMessage ="Enter company of game")]
         public string Company { get; set; }
 
-        [Required (ErrorMessage ="Enter price (Enterprice)")]
+        [Required (ErrorMessage ="Enter price")]
         public double Price { get; set; }
+
+        [Required(ErrorMessage = "Write a description of the game")]
+        public string Description { get; set; }
     }
 }
